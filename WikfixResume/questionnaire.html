@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="img/logo.png">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    
+    </script>
+    <title>UnBoreMe- User Details</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" media="all">
+    <link href="//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/intlTelInput.min.css">
+    <script>
+        if (!localStorage.getItem('token')) {
+            window.location.replace('index.html');
+        }
+    </script>
+</head>
+
+<body>
+<!-- main navigation -->
+<section class="main">
+    <div class="layer">
+        <header>
+            <div class="bottom-grid">
+                <div class="links">
+                    <!-- Navbar brand -->
+                    <ul class="links-unordered-list">
+                        <li class="active">
+                            <a class="navbar-brand" href="index.html">UnBoreMe</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="links">
+                    <ul class="links-unordered-list">
+                        <li class="active">
+                            <a href="signup.html" class="">Register</a>
+                        </li>
+                        <li class="active">
+                            <a href="about.html" class="">About Us</a>
+                        </li>
+                        <li class="active">
+                            <a id="logout" class="nav-link" href>Logout
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        
+        </header>
+        
+        <main>
+            <!-- main container -->
+            <div class="container pt-5">
+                
+                <!-- grid row -->
+                <div class="row">
+                    
+                    <!-- grid col -->
+                    
+                    <!-- grid col -->
+                    
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <div class="text-center icon">
+                                <div class="text-center">
+                                    <h1 style= "font-family:Cookie;
+                                                 font-size: 3.5rem;
+                                                 padding: 10px;
+                                                 margin: 1px;
+                                                z-index: 1;">
+                                         <font color="black">Welcome to the UnBoreMe</font</h1></div>
+                            
+                            </div>
+                        </div>
+                        <hr>
+                        <p>Hey There! Are you bored:)</p>
+                    </div>
+                    <!-- grid col -->
+                    
+                    <div class="col-md-8 questionnaire-div">
+                        <form action="" class="questionnaire-form" id="personalInfo">
+                            <h2 class="text-center">Personal Information</h2>
+                          
+                                <div class="form-group required">
+                                    <label class="control-label" for="name">Full name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="John Doe"
+                                           required>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label" for="emailID">Email address</label>
+                                    <input type="email" class="form-control" id="emailID" name="emailID"
+                                           placeholder="john.doe@example.com"
+                                           required>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label" for="contactNumber">Contact Number</label>
+                                    <input type="tel" class="form-control" id="contactNumber" name="contactNumber"
+                                           required>
+                                </div>
+                                
+                            <div class="wthree-field">
+                                <button type="submit" class="btn btn-primary btn-block next">Next</button>
+                            </div>
+                        </form>
+                        
+                        <form action="" class="questionnaire-form d-none" method="post" id="accoladesInterests">
+                            <h2 class="text-center"> Activities </h2>
+                            <div class="template">
+                                
+                                <div class="form-group required">
+                                    <label class="control-label" for="activities">Activities </label>
+                                    <textarea type="text" class="form-control" id="activities" name="activities"
+                                              placeholder="Volunteer at OSU UHDS, Love hiking"></textarea>
+                                </div>
+                            </div>
+                            <div class="wthree-field">
+                                <button type="submit" class="btn btn-primary btn-block next">Next</button>
+                                <button type="submit" class="btn btn-primary btn-block prev">Previous</button>
+                            </div>
+                        </form>                    
+                                         
+                        
+                        <form action="" class="questionnaire-form d-none" id="projects">
+                            <h2 class="text-center">Start an Activity</h2>
+                            <div class="template">
+                                <div class="form-group">
+                                    <label class="control-label" for="projectTitle">  Activiity Title</label>
+                                    <input type="text" class="form-control" id="projectTitle" name="projectTitle"
+                                           placeholder="ResumeMaker for CS-561">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="projectStartDate">Activity Start Date</label>
+                                    <input type="date" class="form-control" id="projectStartDate"
+                                           name="projectStartDate"
+                                           placeholder="MM/dd/yyyy">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="projectEndDate">Activity End Date</label>
+                                    <input type="date" class="form-control" id="projectEndDate" name="projectEndDate"
+                                           placeholder="MM/dd/yyyy">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group addAnother">
+                                <a href>Add another Activity</a>
+                            </div>
+                            <div class="wthree-field">
+                                <button type="submit" id="questionnaireSubmit" class="btn btn-primary btn-block">Preview
+                                    &amp; Submit
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-block prev">Previous</button>
+                            </div>
+                        </form>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- JQuery -->
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <script src="js/modules/intlTelInput.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/modules/events-handler.js"></script>
+    </div>
+    <footer>
+        <div class="bottom-grid1">
+            <div class="links">
+                <ul class="links-unordered-list">
+                    <li class="">
+                        <a href="about.html" class="">About Us</a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="">Privacy Policy</a>
+                    </li>
+                    <li class="">
+                        <a target="_blank" href="https://pastebin.com/3WXmsxsU" class="">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2019 Key. All rights reserved </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</section>
+</body>
+</html>

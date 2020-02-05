@@ -1,2 +1,2 @@
-# CS562-Project
- UnBoreMe
+# CS561-Project
+ Resume maker
