@@ -242,6 +242,7 @@ body {
     background: transparent;
     box-sizing: border-box;
     font-family: 'Cookie', sans-serif;
+    font-size: 1.65rem;
     width: 100%;
     outline: none;
 }
@@ -487,6 +488,7 @@ ul.links-unordered-list li a {
     background: transparent;
     box-sizing: border-box;
     font-family: 'Cookie', sans-serif;
+    font-size: 1.65rem;
     width: 100%;
     outline: none;
 }
@@ -784,6 +786,7 @@ body {
 .form-group.required .control-label:after {
     content: "*";
     color: red;
+
 }
 
 footer {

@@ -54,9 +54,11 @@ $(document).ready(function () {
             }),
             success: function (result) {
                 if (result) {
+                    localStorage.setItem("email", email);
                     localStorage.setItem("token", result.token);
                     localStorage.setItem("user_id", result.user_id);
                     window.location.href = 'questionnaire.html';
+                    
                 }
             },
             error: function () {
@@ -433,8 +435,9 @@ $(document).ready(function () {
     
     $('#questionnaireSubmit').click(function (e) {
         e.preventDefault();
-        var queryParams = '?user_id=' + localStorage.getItem('user_id') + '&payload=' + JSON.stringify(questionnaireObject);
-        queryParams = queryParams.split(' ').join('%20').split('"').join('%22');
+        var day = $('#day').val(),
+            activity = $('#activity').val(),
+            email = localStorage.getItem('email');
         $.ajax({
             method: 'GET',
             //contentType: "application/json",
@@ -442,11 +445,17 @@ $(document).ready(function () {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
             },
-            url: serverURL + 'data/submit' + queryParams,
+            url: serverURL + 'data/submit',
             //data: JSON.stringify(questionnaireObject),
+            data: JSON.stringify({
+                'email':email,
+                'activity': activity,
+                'day': day
+            }),
             success: function (result) {
                 if (result) {
                     window.location.href = 'preview-and-generate.html';
+                 
                 }
             },
             error: function (result) {
@@ -465,9 +474,9 @@ $(document).ready(function () {
             method: 'GET',
             //contentType: "application/json",
             //dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
-            },
+           // beforeSend: function (xhr) {
+            //    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+            //},
             url: serverURL + 'data/submit' + queryParams,
             //data: JSON.stringify(questionnaireObject),
             success: function (result) {
