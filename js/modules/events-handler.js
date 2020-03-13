@@ -432,7 +432,7 @@ $(document).ready(function () {
             thisForm.prev().removeClass('d-none');
         }
     });
-    
+    /** 
     $('#questionnaireSubmit').click(function (e) {
         e.preventDefault();
         var day = $('#day').val(),
@@ -445,7 +445,7 @@ $(document).ready(function () {
            // beforeSend: function (xhr) {
             //    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
            // },
-            url: 'http://35.222.173.69/submit',
+            //url: 'http://35.222.173.69/submit',
             //data: JSON.stringify(questionnaireObject),
             data: ({
                 'timestamp': Date.now(),
@@ -455,18 +455,219 @@ $(document).ready(function () {
             }),
             success: function (result) {
                 if (result) {
+                    getAMatch(allMatches, userChosenActivities, userChosenDays);
                     localStorage.setItem("timestamp", Date.now());
                     localStorage.setItem("activities", activity);
                     localStorage.setItem("days", day);
                     window.location.href = 'preview-and-generate.html';
-                 
+                 alert( localStorage.getItem('activity'))
                 }
             },
             error: function (result) {
                 alert("Couldn't insert data!")
             }
         })
-    });
+    });**/
+    /**----------------------------- Get Matches-----------------------------**/
+    //var day = $('#day').val(),
+    //var activity = $('#activity').val();
+    //email = localStorage.getItem('email');
+
+    function cartesianProduct(a) { // a = array of array
+        var i, j, l, m, a1, o = [];
+        if (!a || a.length == 0) return a;
+    
+        a1 = a.splice(0, 1)[0]; // the first array of a
+        a = cartesianProduct(a);
+        for (i = 0, l = a1.length; i < l; i++) {
+            if (a && a.length) for (j = 0, m = a.length; j < m; j++)
+                o.push([a1[i]].concat(a[j]));
+            else
+                o.push([a1[i]]);
+        }
+        return o;
+    }
+    
+    function choose(choices) {
+      console.log("This:", choices);
+      let index = Math.floor(Math.random() * choices.length);
+      return choices[index];
+    }
+    
+    function matchesDay(match, day) {
+      return match.indexOf(day) > -1;
+    }
+    
+    function matchesActivity(match, activity) {
+      return match.indexOf(activity) > -1;
+    }
+    
+    function matchesCriteria(match, day, activity) {
+        return matchesDay(match, day) && matchesActivity(match, activity);
+    }
+    
+    function getAMatch(allMatches, requiredActivities, requiredDays) {
+      var response = null;
+      while (response === null) {
+    
+        let match = choose(allMatches);
+        let allCombinations = cartesianProduct([requiredActivities, requiredDays])
+    
+        for (pack of allCombinations) {
+          let activity = pack[0]
+          let day = pack[1]
+    
+          if (matchesCriteria(match, day, activity)) {
+            response = match;
+            break;
+          }
+        }
+    
+      }
+    
+      return response;
+    }
+    
+    // let allMatches = localStorage.getItem("allMatches")
+    //let allMatches = re('./out.json');
+    
+    let allMatches = [
+        "Go running with Rashmi (rashmi@oregonstate.edu) this sunday!",
+        "Go running with Rashmi (rashmi@oregonstate.edu) next sunday!",
+        "Go running with Rashmi (rashmi@oregonstate.edu) this saturday!",
+        "Go running with Rashmi (rashmi@oregonstate.edu) next saturday!",
+        "Go running with Bhavya (bhavya@oregonstate.edu) this sunday!",
+        "Go running with Bhavya (bhavya@oregonstate.edu) next sunday!",
+        "Go running with Bhavya (bhavya@oregonstate.edu) this saturday!",
+        "Go running with Bhavya (bhavya@oregonstate.edu) next saturday!",
+        "Go running with Rahul (daminens@oregonstate.edu) this sunday!",
+        "Go running with Rahul (daminens@oregonstate.edu) next sunday!",
+        "Go running with Rahul (daminens@oregonstate.edu) this saturday!",
+        "Go running with Rahul (daminens@oregonstate.edu) next saturday!",
+        "Go running with Raghu (raghu@oregonstate.edu) this sunday!",
+        "Go running with Raghu (raghu@oregonstate.edu) next sunday!",
+        "Go running with Raghu (raghu@oregonstate.edu) this saturday!",
+        "Go running with Raghu (raghu@oregonstate.edu) next saturday!",
+        "Go running with Vijay (vijay@oregonstate.edu) this sunday!",
+        "Go running with Vijay (vijay@oregonstate.edu) next sunday!",
+        "Go running with Vijay (vijay@oregonstate.edu) this saturday!",
+        "Go running with Vijay (vijay@oregonstate.edu) next saturday!",
+        "Go running with Krithika (kk@oregonstate.edu) this sunday!",
+        "Go running with Krithika (kk@oregonstate.edu) next sunday!",
+        "Go running with Krithika (kk@oregonstate.edu) this saturday!",
+        "Go running with Krithika (kk@oregonstate.edu) next saturday!",
+        "Go running with Manish (manish@oregonstate.edu) this sunday!",
+        "Go running with Manish (manish@oregonstate.edu) next sunday!",
+        "Go running with Manish (manish@oregonstate.edu) this saturday!",
+        "Go running with Manish (manish@oregonstate.edu) next saturday!",
+        "Go running with sndkjfn (wefwekn@gmasi.com) this sunday!",
+        "Go running with sndkjfn (wefwekn@gmasi.com) next sunday!",
+        "Go running with sndkjfn (wefwekn@gmasi.com) this saturday!",
+        "Go running with sndkjfn (wefwekn@gmasi.com) next saturday!",
+        "Go hiking with Rashmi (rashmi@oregonstate.edu) this sunday!",
+        "Go hiking with Rashmi (rashmi@oregonstate.edu) next sunday!",
+        "Go hiking with Rashmi (rashmi@oregonstate.edu) this saturday!",
+        "Go hiking with Rashmi (rashmi@oregonstate.edu) next saturday!",
+        "Go hiking with Bhavya (bhavya@oregonstate.edu) this sunday!",
+        "Go hiking with Bhavya (bhavya@oregonstate.edu) next sunday!",
+        "Go hiking with Bhavya (bhavya@oregonstate.edu) this saturday!",
+        "Go hiking with Bhavya (bhavya@oregonstate.edu) next saturday!",
+        "Go hiking with Rahul (daminens@oregonstate.edu) this sunday!",
+        "Go hiking with Rahul (daminens@oregonstate.edu) next sunday!",
+        "Go hiking with Rahul (daminens@oregonstate.edu) this saturday!",
+        "Go hiking with Rahul (daminens@oregonstate.edu) next saturday!",
+        "Go hiking with Raghu (raghu@oregonstate.edu) this sunday!",
+        "Go hiking with Raghu (raghu@oregonstate.edu) next sunday!",
+        "Go hiking with Raghu (raghu@oregonstate.edu) this saturday!",
+        "Go hiking with Raghu (raghu@oregonstate.edu) next saturday!",
+        "Go hiking with Vijay (vijay@oregonstate.edu) this sunday!",
+        "Go hiking with Vijay (vijay@oregonstate.edu) next sunday!",
+        "Go hiking with Vijay (vijay@oregonstate.edu) this saturday!",
+        "Go hiking with Vijay (vijay@oregonstate.edu) next saturday!",
+        "Go hiking with Krithika (kk@oregonstate.edu) this sunday!",
+        "Go hiking with Krithika (kk@oregonstate.edu) next sunday!",
+        "Go hiking with Krithika (kk@oregonstate.edu) this saturday!",
+        "Go hiking with Krithika (kk@oregonstate.edu) next saturday!",
+        "Go hiking with Manish (manish@oregonstate.edu) this sunday!",
+        "Go hiking with Manish (manish@oregonstate.edu) next sunday!",
+        "Go hiking with Manish (manish@oregonstate.edu) this saturday!",
+        "Go hiking with Manish (manish@oregonstate.edu) next saturday!",
+        "Go hiking with sndkjfn (wefwekn@gmasi.com) this sunday!",
+        "Go hiking with sndkjfn (wefwekn@gmasi.com) next sunday!",
+        "Go hiking with sndkjfn (wefwekn@gmasi.com) this saturday!",
+        "Go hiking with sndkjfn (wefwekn@gmasi.com) next saturday!",
+        "Go drinking with Rashmi (rashmi@oregonstate.edu) this sunday!",
+        "Go drinking with Rashmi (rashmi@oregonstate.edu) next sunday!",
+        "Go drinking with Rashmi (rashmi@oregonstate.edu) this saturday!",
+        "Go drinking with Rashmi (rashmi@oregonstate.edu) next saturday!",
+        "Go drinking with Bhavya (bhavya@oregonstate.edu) this sunday!",
+        "Go drinking with Bhavya (bhavya@oregonstate.edu) next sunday!",
+        "Go drinking with Bhavya (bhavya@oregonstate.edu) this saturday!",
+        "Go drinking with Bhavya (bhavya@oregonstate.edu) next saturday!",
+        "Go drinking with Rahul (daminens@oregonstate.edu) this sunday!",
+        "Go drinking with Rahul (daminens@oregonstate.edu) next sunday!",
+        "Go drinking with Rahul (daminens@oregonstate.edu) this saturday!",
+        "Go drinking with Rahul (daminens@oregonstate.edu) next saturday!",
+        "Go drinking with Raghu (raghu@oregonstate.edu) this sunday!",
+        "Go drinking with Raghu (raghu@oregonstate.edu) next sunday!",
+        "Go drinking with Raghu (raghu@oregonstate.edu) this saturday!",
+        "Go drinking with Raghu (raghu@oregonstate.edu) next saturday!",
+        "Go drinking with Vijay (vijay@oregonstate.edu) this sunday!",
+        "Go drinking with Vijay (vijay@oregonstate.edu) next sunday!",
+        "Go drinking with Vijay (vijay@oregonstate.edu) this saturday!",
+        "Go drinking with Vijay (vijay@oregonstate.edu) next saturday!",
+        "Go drinking with Krithika (kk@oregonstate.edu) this sunday!",
+        "Go drinking with Krithika (kk@oregonstate.edu) next sunday!",
+        "Go drinking with Krithika (kk@oregonstate.edu) this saturday!",
+        "Go drinking with Krithika (kk@oregonstate.edu) next saturday!",
+        "Go drinking with Manish (manish@oregonstate.edu) this sunday!",
+        "Go drinking with Manish (manish@oregonstate.edu) next sunday!",
+        "Go drinking with Manish (manish@oregonstate.edu) this saturday!",
+        "Go drinking with Manish (manish@oregonstate.edu) next saturday!",
+        "Go drinking with sndkjfn (wefwekn@gmasi.com) this sunday!",
+        "Go drinking with sndkjfn (wefwekn@gmasi.com) next sunday!",
+        "Go drinking with sndkjfn (wefwekn@gmasi.com) this saturday!",
+        "Go drinking with sndkjfn (wefwekn@gmasi.com) next saturday!",
+        "Go biking with Rashmi (rashmi@oregonstate.edu) this sunday!",
+        "Go biking with Rashmi (rashmi@oregonstate.edu) next sunday!",
+        "Go biking with Rashmi (rashmi@oregonstate.edu) this saturday!",
+        "Go biking with Rashmi (rashmi@oregonstate.edu) next saturday!",
+        "Go biking with Bhavya (bhavya@oregonstate.edu) this sunday!",
+        "Go biking with Bhavya (bhavya@oregonstate.edu) next sunday!",
+        "Go biking with Bhavya (bhavya@oregonstate.edu) this saturday!",
+        "Go biking with Bhavya (bhavya@oregonstate.edu) next saturday!",
+        "Go biking with Rahul (daminens@oregonstate.edu) this sunday!",
+        "Go biking with Rahul (daminens@oregonstate.edu) next sunday!",
+        "Go biking with Rahul (daminens@oregonstate.edu) this saturday!",
+        "Go biking with Rahul (daminens@oregonstate.edu) next saturday!",
+        "Go biking with Raghu (raghu@oregonstate.edu) this sunday!",
+        "Go biking with Raghu (raghu@oregonstate.edu) next sunday!",
+        "Go biking with Raghu (raghu@oregonstate.edu) this saturday!",
+        "Go biking with Raghu (raghu@oregonstate.edu) next saturday!",
+        "Go biking with Vijay (vijay@oregonstate.edu) this sunday!",
+        "Go biking with Vijay (vijay@oregonstate.edu) next sunday!",
+        "Go biking with Vijay (vijay@oregonstate.edu) this saturday!",
+        "Go biking with Vijay (vijay@oregonstate.edu) next saturday!",
+        "Go biking with Krithika (kk@oregonstate.edu) this sunday!",
+        "Go biking with Krithika (kk@oregonstate.edu) next sunday!",
+        "Go biking with Krithika (kk@oregonstate.edu) this saturday!",
+        "Go biking with Krithika (kk@oregonstate.edu) next saturday!",
+        "Go biking with Manish (manish@oregonstate.edu) this sunday!",
+        "Go biking with Manish (manish@oregonstate.edu) next sunday!",
+        "Go biking with Manish (manish@oregonstate.edu) this saturday!",
+        "Go biking with Manish (manish@oregonstate.edu) next saturday!",
+        "Go biking with sndkjfn (wefwekn@gmasi.com) this sunday!",
+        "Go biking with sndkjfn (wefwekn@gmasi.com) next sunday!",
+        "Go biking with sndkjfn (wefwekn@gmasi.com) this saturday!",
+        "Go biking with sndkjfn (wefwekn@gmasi.com) next saturday!"
+      ];
+      
+    let userChosenActivities = ["biking","running"];
+    let userChosenDays = ["this saturday"];
+
+    console.log(getAMatch(allMatches, userChosenActivities, userChosenDays));
+    $('#mat').html(getAMatch(allMatches, userChosenActivities, userChosenDays));
+    
     /**----------------------------- Questionnaire Related Ends-----------------------------**/
     
     $('#show-template').click(function (e) {
@@ -481,7 +682,7 @@ $(document).ready(function () {
            // beforeSend: function (xhr) {
             //    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
             //},
-            url: 'http://35.222.173.69/matches?user_id='+ localStorage.getItem('user_id') ,
+           // url: 'http://35.222.173.69/matches?user_id='+ localStorage.getItem('user_id') ,
             //data: JSON.stringify(questionnaireObject),
             success: function (result) {
                 if (result) {
