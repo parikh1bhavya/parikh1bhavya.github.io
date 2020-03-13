@@ -442,15 +442,16 @@ $(document).ready(function () {
             method: 'GET',
             //contentType: "application/json",
             //dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
-            },
+           // beforeSend: function (xhr) {
+            //    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+           // },
             url: serverURL + 'data/submit',
             //data: JSON.stringify(questionnaireObject),
             data: JSON.stringify({
-                'email':email,
-                'activity': activity,
-                'day': day
+                'timestamp': Date.now(),
+                'user_id':localStorage.getItem('user_id'),
+                'activities': activity,
+                'days': day
             }),
             success: function (result) {
                 if (result) {
