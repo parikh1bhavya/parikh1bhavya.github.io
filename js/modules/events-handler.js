@@ -440,14 +440,14 @@ $(document).ready(function () {
             email = localStorage.getItem('email');
         $.ajax({
             method: 'GET',
-            //contentType: "application/json",
-            //dataType: 'json',
+            contentType: "application/json",
+            dataType: 'json',
            // beforeSend: function (xhr) {
             //    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
            // },
-            url: serverURL + 'data/submit',
+            url: 'http://35.222.173.69/submit',
             //data: JSON.stringify(questionnaireObject),
-            data: JSON.stringify({
+            data: ({
                 'timestamp': Date.now(),
                 'user_id':localStorage.getItem('user_id'),
                 'activities': activity,
@@ -455,6 +455,9 @@ $(document).ready(function () {
             }),
             success: function (result) {
                 if (result) {
+                    localStorage.setItem("timestamp", Date.now());
+                    localStorage.setItem("activities", activity);
+                    localStorage.setItem("days", day);
                     window.location.href = 'preview-and-generate.html';
                  
                 }
@@ -473,12 +476,12 @@ $(document).ready(function () {
         queryParams = queryParams.split(' ').join('%20').split('"').join('%22');
         $.ajax({
             method: 'GET',
-            //contentType: "application/json",
-            //dataType: 'json',
+            contentType: "application/json",
+            dataType: 'json',
            // beforeSend: function (xhr) {
             //    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
             //},
-            url: serverURL + 'data/submit' + queryParams,
+            url: 'http://35.222.173.69/matches?user_id='+ localStorage.getItem('user_id') ,
             //data: JSON.stringify(questionnaireObject),
             success: function (result) {
                 if (result) {
